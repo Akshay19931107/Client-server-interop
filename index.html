@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interop App</title>
+    <link rel="stylesheet" href="node_modules/ol/ol.css">
+    <link rel="stylesheet" href="style.css"> <!-- Updated CSS -->
+    
+    <script type="module" src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ol@6.6.1/dist/ol.js"></script>
+</head>
+
+<body>
+
+    <header class="header">
+        <h1 class="title">PHYSICAL AND CULTURAL WORLD</h1>
+    </header>
+
+    <div class="container">
+        <!-- Left Panel: Tabs and Inputs -->
+        <div class="leftside">
+            <div class="tab-heading">
+                <button class="tablinks btn-primary active" id="WMSbtn">WMS</button>
+                <button class="tablinks btn-primary" id="WFSbtn">WFS</button>
+                <button class="tablinks btn-primary" id="WCSbtn">WCS</button>
+            </div>
+
+            <div class="tab-contents">
+                <!-- WMS Section -->
+                <div id="WMS" class="content active">
+                    <h2 class="section-title">Web Map Service (WMS)</h2>
+                    <button class="btn-secondary" id="getWMSCapabilities">Get WMS Capabilities</button>
+                    
+                    <label for="wmslayers">Choose a layer:</label>
+                    <select id="layers" class="dropdown"></select>
+
+                    <label for="srs">Choose SRS:</label>
+                    <select id="srs" class="dropdown"></select>
+
+                    <label for="format">Choose Format:</label>
+                    <select id="format" class="dropdown">
+                        <option value="image/png">image/png</option>
+                        <option value="image/jpeg">image/jpeg</option>
+                    </select>
+
+                    <label for="bbox">Bounding box (comma-separated):</label>
+                    <input type="text" id="bbox" class="input-box" value="-180.0,-90.0,180.0,90.0">
+
+                    <button class="btn-primary" id="getMapButton">Get WMS Map</button>
+
+                    <button class="btn-secondary" id="getWMSFeatureinfo">Get WMS Feature Info</button>
+                </div>
+
+                <!-- WFS Section -->
+                <div id="WFS" class="content">
+                    <h2 class="section-title">Web Feature Service (WFS)</h2>
+                    <button class="btn-secondary" id="getWFSCapabilities">Get WFS Capabilities</button>
+                    
+                    <label for="wfsLayers">Choose a layer:</label>
+                    <select id="wfsLayers" class="dropdown"></select>
+
+                    <label for="WFSsrs">Choose SRS:</label>
+                    <select id="WFSsrs" class="dropdown"></select>
+
+                    <button class="btn-primary" id="getWFSFeature">Get WFS Feature</button>
+                    <button class="btn-secondary" id="describeWFSFeature">Describe WFS Feature Type</button>
+                </div>
+
+                <!-- WCS Section -->
+                <div id="WCS" class="content">
+                    <h2 class="section-title">Web Coverage Service (WCS)</h2>
+                    <button class="btn-secondary" id="getWCSCapabilities">Get WCS Capabilities</button>
+
+                    <button class="btn-primary" id="getWCSFeature">Get WCS Coverage</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Map & Results -->
+        <div class="rightside">
+            <div id="map" class="map"></div>
+            <div id="results-container">
+                <h3>Results</h3>
+                <div id="capabilities-results"></div>
+                <div id="feature-info-results"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
